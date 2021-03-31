@@ -1,7 +1,7 @@
 <?php require 'inc/head.php'; ?>
 <?php
   // Definition des constantes et variables
-  define('LOGIN','toto');
+  /**define('LOGIN','toto');
   
   $errorMessage = '';
  
@@ -32,7 +32,16 @@
     {
       $errorMessage = 'Veuillez inscrire vos identifiants svp !';
     }
-  }
+  }*/
+  if(isset($_SESSION['loginname'])) {
+    header('Location: index.php');
+}
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_POST['loginname']) && !empty($_POST['loginname'])){
+        $_SESSION['loginname'] = $_POST['loginname'];
+        header('Location: index.php');
+    }
+}
 ?>
 <div class="container" style="margin-top:40px">
     <div class="row">
@@ -65,7 +74,7 @@
                                             echo '<p>', htmlspecialchars($errorMessage) ,'</p>';
                                         }
                                         ?>
-                                            <input class="form-control" placeholder="Username" name="login"
+                                            <input class="form-control" placeholder="Username" name="loginname"
                                                    type="text" autofocus>
                                         </div>
                                     </div>

@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+    $_SESSION['cart'] ?? $_SESSION['cart'] = [];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +19,7 @@
 <body>
 <header>
 <?php
-// On prolonge la session
+/**On prolonge la session
 session_start();
 // On teste si la variable de session existe et contient une valeur
 if(empty($_SESSION['login'])) 
@@ -22,10 +27,9 @@ if(empty($_SESSION['login']))
   // Si inexistante ou nulle, on redirige vers le formulaire de login
   header('Location: /login.php');
   exit();
-}
+}*/
 
 ?>
-    <!-- MENU ENTETE -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -46,6 +50,14 @@ if(empty($_SESSION['login']))
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                <?php
+                        if(isset($_SESSION['loginname'])){
+                            echo '<li><a href="/logout.php">Logout</a></li>';
+                        }
+                        else{
+                            echo '<li><a href="/login.php">Login</a></li>';
+                        }
+                    ?>
                     <li><a href="#">Chocolates chips</a></li>
                     <li><a href="#">Nuts</a></li>
                     <li><a href="#">Gluten full</a></li>
@@ -62,7 +74,7 @@ if(empty($_SESSION['login']))
     <div class="container-fluid text-right">
         <strong> <?php
     // Ici on est bien loggué, on affiche un message
-    echo 'Hello '. $_SESSION['login'] .'!';
+    echo 'Hello '. $_SESSION['loginname'] .'!';
   ?>
   </strong>
     </div>
